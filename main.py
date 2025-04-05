@@ -2,7 +2,7 @@ import pygame
 from constants import *
 from player import *
 
-def main():
+def main() -> None:
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
@@ -10,12 +10,17 @@ def main():
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
+    # Main game loop
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
 
-        screen.fill(SCREEN_BACKGROUND_COLOR)
+        # Update
+        player.update(dt)
+
+        # Draw
+        screen.fill(GFX_SCREEN_BACKGROUND_COLOR)
         player.draw(screen)
         pygame.display.flip()
 
