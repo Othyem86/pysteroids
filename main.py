@@ -1,3 +1,4 @@
+import sys
 import pygame
 from constants import *
 from player import *
@@ -28,11 +29,16 @@ def main() -> None:
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return
+                close_program()
 
         # Update
-        for obj in updateable:
-            obj.update(dt)
+        updateable.update(dt)
+
+        # Check collision
+        for obj in asteroids:
+            if (obj.collides_with(player)):
+                print("Game over!")
+                close_program()
 
         # Draw
         screen.fill(GFX_SCREEN_BACKGROUND_COLOR)
@@ -42,6 +48,12 @@ def main() -> None:
 
         # limit the game to 60 FPS
         dt = clock.tick(60) / 1000
+
+def close_program() -> None:
+    print("Exiting program...")
+    sys.exit()
+
+
 
 
 if __name__ == "__main__":
