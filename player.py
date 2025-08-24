@@ -22,6 +22,7 @@ class Player(CircleShape):
         return [a, b, c]
 
     def update(self, dt):
+        super().update(dt)
         self.shoot_timer -= dt
         keys = pygame.key.get_pressed()
 

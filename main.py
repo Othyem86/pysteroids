@@ -1,10 +1,11 @@
 import sys
 import pygame
 from constants import *
-from shot import Shot
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from shot import Shot
+
 
 def main():
     pygame.init()
@@ -38,11 +39,12 @@ def main():
             if asteroid.collides_with(player):
                 print("Game over!")
                 sys.exit()
-            for bullet in shots:
-                if bullet.collides_with(asteroid):
-                    bullet.kill()
+
+            for shot in shots:
+                if asteroid.collides_with(shot):
+                    shot.kill()
                     asteroid.split()
-        
+
         screen.fill("black")
 
         for obj in drawable:
@@ -52,6 +54,7 @@ def main():
 
         # limit the framerate to 60 FPS
         dt = clock.tick(60) / 1000
+
 
 if __name__ == "__main__":
     main()
